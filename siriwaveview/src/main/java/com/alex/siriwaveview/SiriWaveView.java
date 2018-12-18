@@ -130,21 +130,6 @@ public class SiriWaveView extends View {
 		return this.amplitude;
 	}
 
-	private ObjectAnimator _animator;
-
-	public void animateLevel(float targetLevel, long duration) {
-		if (_animator != null && _animator.isRunning()) {
-			_animator.cancel();
-			_animator.removeAllListeners();
-			_animator = null;
-		}
-
-		_animator = ObjectAnimator.ofFloat(this, "level", targetLevel);
-		_animator.setAutoCancel(true);
-		_animator.setDuration(duration);
-		_animator.start();
-	}
-
 	public void setLevel(float level) {
 		this.level = level;
 	}
@@ -177,12 +162,19 @@ public class SiriWaveView extends View {
 	}
 
 	public void setWaveColor(int waveColor) {
-		mPaint.setColor(waveColor);
-		invalidate();
+		this.waveColor = waveColor;
+		mPaint.setColor(this.waveColor);
+	}
+
+	public int getWaveColor() {
+		return this.waveColor;
 	}
 
 	public void setStrokeWidth(float strokeWidth) {
 		mPaint.setStrokeWidth(strokeWidth);
-		invalidate();
+	}
+
+	public float getStrokeWidth() {
+		return mPaint.getStrokeWidth();
 	}
 }
